@@ -1,8 +1,7 @@
 const apiKey = '9a50a6a2d31e9e6443bc11bc63ba5142';
+const cities = 'Cities';
 
-let cityWeatherData;
-let cityLat;
-let cityLon;
+
 
 /*
 - getStoredArr is a function used to grab a stored array from local storage
@@ -31,8 +30,8 @@ const getCityGeoData = (cityName) => {
 // This function is used to convert geo data of getCityGeoData into a lat/lon to be used to get weather data
 const getLatLong = (data) => {
     for(let i = 0; i < 1; i++){
-        cityLat = data[i].lat;
-        cityLon = data[i].lon;
+        const cityLat = data[i].lat;
+        const cityLon = data[i].lon;
         convertForecastCoordinates(cityLat, cityLon)
         convertCurrentWeatherCoords(cityLat, cityLon)
     }
@@ -78,6 +77,8 @@ const displayCurrentWeather = (data) => {
     
 }  
 
+// This function is used to display the 5 day forecast
+// The API returns data in 3 hour increments so I needed to use the 8th iteration of each increment to get a forecast that is 24 hour apart
 const displayForecast = (data) => {
 
     console.log(data);
@@ -142,17 +143,42 @@ const displayForecast = (data) => {
 
 
 
+
+
 const searchButton = document.getElementById('srch-btn')
 
 searchButton.addEventListener('click', event => {
     event.preventDefault();
-
-    const searchInput = document.getElementById('srch-input').value;
     const documentMain = document.querySelector('main');
-
     documentMain.style.display = 'inline';
+    const searchInput = document.getElementById('srch-input').value;
+    const searchedCities = [];
+    searchedCities.push(searchInput);
+
+    
 
     getCityGeoData(searchInput);
-    localStorage.setItem('Cities', searchInput)
+    localStorage.setItem(cities, JSON.stringify(searchedCities))
+
+    const localStoredArr = getStoredArr(cities);
+    if(localStoredArr){
+
+        localStoredArr.push(searchInput)
+        localStorage.setItem(cities, JSON.stringify(localStoredArr))
+        if(localStoredArr[0]){
+            const firstRecentCity = document.getElementById('recent-city-1');
+
+            firstRecentCity.textContent = localStoredArr[0];
+        }
+        
+    }
+
+
+
+
+
+    
+
+    
 
 })
