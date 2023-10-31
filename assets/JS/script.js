@@ -7,13 +7,13 @@ const cities = 'Cities';
 - getStoredArr is a function used to grab a stored array from local storage
 - can be used for any stored array and it will parse
 */ 
-const getStoredArr = (localStorageArr) => JSON.parse(localStorage.getItem(localStorageArr));
+// const getStoredArr = (localStorageArr) => JSON.parse(localStorage.getItem(localStorageArr));
 /*
 - initializeStorage takes a local storage key that has been converted to a variable and removes it from local storage
 */
-const initalizeStorage = (storageName) => {
-localStorage.removeItem(storageName);
-}
+// const initalizeStorage = (storageName) => {
+// localStorage.removeItem(storageName);
+// }
 
 
 // This function is used to take in a city name and get it's geographical data from the Geo API of openweather
@@ -57,8 +57,6 @@ const convertCurrentWeatherCoords = (lat, lon) => {
 
 // This function is used to display the current weather at the top of the page
 const displayCurrentWeather = (data) => {
-    console.log(data)
-    console.log(data.weather[0])
     const currentWeather = data.weather[0];
     const temperatureInfo = data.main;
     const cityName = data.name;
@@ -80,8 +78,6 @@ const displayCurrentWeather = (data) => {
 // This function is used to display the 5 day forecast
 // The API returns data in 3 hour increments so I needed to use the 8th iteration of each increment to get a forecast that is 24 hour apart
 const displayForecast = (data) => {
-
-    console.log(data);
     const dataList = data.list;
 
     const dayOneTitleEl = document.getElementById('day-1-title');
