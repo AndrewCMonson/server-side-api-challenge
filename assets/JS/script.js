@@ -147,6 +147,7 @@ const displayForecast = (data) => {
 
 const searchButton = document.getElementById('srch-btn')
 
+// This event listener is incomplete. It needs to add and retrieve information from local storage
 searchButton.addEventListener('click', event => {
     event.preventDefault();
     const documentMain = document.querySelector('main');
@@ -167,18 +168,7 @@ searchButton.addEventListener('click', event => {
         localStorage.setItem(cities, JSON.stringify(localStoredArr))
         if(localStoredArr[0]){
             const firstRecentCity = document.getElementById('recent-city-1');
-
             firstRecentCity.textContent = localStoredArr[0];
-        }
-        
+        } 
     }
-
-
-
-
-
-    
-
-    
-
 })
